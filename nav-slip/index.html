@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>模仿百度新闻菜单滑动动画</title>
+    <style type="text/css">
+    body,
+    div,
+    ul,
+    li,
+    a {
+        margin: 0px;
+        padding: 0px;
+        font-size: 20px;
+        color: #FFF;
+        border: 0;
+    }
+    
+    .div-nav-container {
+        margin-top: 50px;
+        width: 100%;
+        background-color: #01204F
+    }
+    
+    .div-nav {
+        width: : 870px;
+        margin: 0px auto;
+    }
+    
+    ul {
+        list-style: outside none none;
+        width: 100%;
+        height: 50px;
+    }
+    
+    ul li {
+        float: left;
+    }
+    
+    ul li a {
+        line-height: 50px;
+        display: block;
+        padding: 0px 15px;
+        text-align: center;
+        text-decoration: none;
+    }
+    
+    .div-hover {
+        background-color: red;
+        height: 50px;
+        left: 0px;
+        top: 0px;
+        width: 0px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="div-nav-container">
+        <div class="div-nav">
+            <div class="div-hover"></div>
+            <ul>
+                <li><a href="javascript:void(0)">网站首页</a></li>
+                <li><a href="javascript:void(0)">热点</a></li>
+                <li><a href="javascript:void(0)">国际新闻</a></li>
+                <li><a href="javascript:void(0)">国内新闻</a></li>
+                <li><a href="javascript:void(0)">体育新闻</a></li>
+                <li><a href="javascript:void(0)">娱乐新闻</a></li>
+                <li><a href="javascript:void(0)">名人</a></li>
+                <li><a href="javascript:void(0)">古迹</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+var divHoverLeft = 0;
+var aWidth = 0;
+
+$(document).ready(function() {
+    $('a').on('mouseover', function() {
+        setDivHoverWidthAndLeft(this);
+        //设置滑动动画
+        $(".div-hover").stop().animate({
+            width: aWidth,
+            left: divHoverLeft
+        }, 150);
+    })
+});
+
+function setDivHoverWidthAndLeft(ele) {
+    return $(ele).parent().width;
+}
+//获得li宽度
+function GetWidths(ele) {
+    return $(ele).parent().width()
+}
+//获得div-hover左边距
+function GetLeft(element) {
+    var menuList = $(element).parent().prevAll();
+    var left = 0;
+    $.each(menuList, function(index, ele) {
+        left += $(ele).width()
+    });
+    return left;
+}
+</script>
+
+</html>
